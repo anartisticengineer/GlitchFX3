@@ -1,5 +1,6 @@
 .idea/workspace.xml
 .pytest_cache/
+__pycache__/
 gfx/__pycache__/
 gfx/tests/__pycache__/
 gfx/effects/__pycache__/
