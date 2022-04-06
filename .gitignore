@@ -1,4 +1,6 @@
-.idea/
+.idea/workspace.xml
+.pytest_cache/
 gfx/__pycache__/
+gfx/tests/__pycache__/
 gfx/effects/__pycache__/
 gfx/util/__pycache__/

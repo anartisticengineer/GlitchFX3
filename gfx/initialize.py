@@ -36,7 +36,7 @@ class GFX:
 
     @staticmethod
     def get_effect_request():
-        return input('Enter effect (or x to exit): ').split(' ')
+        return input('Enter effect (or x to exit): ').split('/')
 
     # Try and apply the effect
     def apply_effect(self, effect_name, **kwargs):
