@@ -1,11 +1,12 @@
 import cv2 as cv
+from os import path
 from tkinter import filedialog as fd
 from .util.effectdictionary import effect_dictionary
 
 
 class GFX:
     _PROMPT = 'Select an image file'
-    _FILE_TYPES = (('JPGs', '*.jpg'), ('PNGs', '.png'))
+    _FILE_TYPES = (('JPG', '*.jpg'), ('PNG', '*.png'))
     _SRC = None
     _TEMP = None
     _DEST = None
@@ -24,6 +25,7 @@ class GFX:
 
         file_name = fd.askopenfilename(title=self._PROMPT, filetypes=self._FILE_TYPES)
         print(f'Opening file: {file_name}')
+        print(f'Size: {path.getsize(file_name)}')
         self._SRC = cv.imread(file_name, cv.IMREAD_COLOR)
         self._TEMP = self._SRC
         self._DEST = self._SRC
@@ -51,8 +53,14 @@ class GFX:
         self._DEST = self._TEMP
 
     def save_image(self):
-        save_location = fd.asksaveasfile()
+        save_file_name = fd.asksaveasfilename(filetypes=self._FILE_TYPES)
+        cv.imwrite(save_file_name, self._DEST)
+        print(f'Saved image: {save_file_name}')
+        print(f'Size: {path.getsize(save_file_name)}')
 
     def show_src_image(self):
         cv.imshow('Source Image', self._SRC)
+
+    def show_dest_image(self):
+        cv.imshow('Edited Image', self._DEST)
 
