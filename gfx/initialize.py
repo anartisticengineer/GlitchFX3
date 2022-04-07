@@ -62,5 +62,5 @@ class GFX:
         cv.imshow('Source Image', self._SRC)
 
     def show_dest_image(self):
-        cv.imshow('Edited Image', self._DEST)
+        cv.imshow('Edited Image (press \'s\' to save)', self._DEST)
 
