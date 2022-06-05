@@ -24,6 +24,7 @@ def warp(src_img, **kwargs):
         return int(_u * np.cos(_factor) - _v * np.sin(_factor)) % h, _v
 
     f_dict = {'shearX': shear_x, 'shearY': shear_y, 'rotateX': rotate_x, 'rotateY': rotate_y}
+
     try:
         f = f_dict[_warp_type]
         for (u, v) in pixels_generator(w, h):
@@ -36,21 +37,23 @@ def warp(src_img, **kwargs):
 
 
 def wavy(src_img, **kwargs):
-    _octaves = kwargs.get('o', 5)
+    _octaves = kwargs.get('oct', 5)
 
     dst_img = src_img
-    (h, w, _) = src_img.shape
+    (_, w, _) = src_img.shape
 
     pn = PerlinNoise(octaves=_octaves, seed=np.random.randint(100))
 
     try:
+        if _octaves < 0:
+            raise ValueError
         for u in x_generator(w):
             offset = int(100 * pn([u/w]))
             col = src_img[:, u]
             shifted_col = np.vstack((col[offset:], col[:offset]))
             dst_img[:, u] = shifted_col
     except ValueError:
-        pass
+        print('Octave value must be a positive integer (effect bypassed)')
     finally:
         return dst_img
 
