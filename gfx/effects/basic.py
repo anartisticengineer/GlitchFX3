@@ -4,6 +4,7 @@ import numpy as np
 
 def noisy(src_img, **kwargs):
     _percent: float = kwargs.get('p', 0.1)
+
     try:
         if _percent < 0.0 or _percent > 1.0:
             raise ValueError
@@ -24,9 +25,10 @@ def noisy(src_img, **kwargs):
 
 
 def scan_lines(src_img, **kwargs):
-    _orientation = kwargs.get('or', 'h')
+    _orientation: str = kwargs.get('or', 'h')
 
     orientation_dict = {'h': 0, 'v': 1}
+
     try:
         max_i = src_img.shape[orientation_dict[_orientation]]
         if _orientation == 'h':
@@ -40,11 +42,12 @@ def scan_lines(src_img, **kwargs):
 
 
 def high_pass(src_img, **kwargs):
-    _percent = kwargs.get('p', 0.5)
-    _kernel_size = kwargs.get('k', 3)
-    _amp = kwargs.get('a', 1.0)
+    _percent: float = kwargs.get('p', 0.5)
+    _kernel_size: int = kwargs.get('k', 3)
+    _amp: float = kwargs.get('a', 1.0)
 
-    error_msg = ''
+    error_msg = 'An error occurred'
+
     try:
         _kernel_size = int(_kernel_size)
         if _percent < 0.0 or _percent > 1.0:
@@ -65,5 +68,4 @@ def high_pass(src_img, **kwargs):
         filter_kernel *= (-1.0 * _percent)
         filter_kernel[midpoint, midpoint] = (_kernel_size * 2) * _amp
         dst_img = cv.filter2D(src_img, -1, filter_kernel)
-
         return dst_img

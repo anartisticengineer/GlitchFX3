@@ -61,6 +61,10 @@
                 <td>wavy</td>
                 <td>oct</td>
             </tr>
+            <tr>
+                <td>burn</td>
+                <td>p</td>
+            </tr>
         </tbody>
     </table>
     <h4>Expected values</h4>
