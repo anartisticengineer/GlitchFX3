@@ -1,9 +1,10 @@
-from ..effects import basic, distort
+from ..effects.basic import Noisy, Scanlines, Highpass
+from ..effects.distort import Warp, Wavy, Burn
 
-effect_dictionary = {'noisy': basic.noisy,
-                     'highpass': basic.high_pass,
-                     'scanlines': basic.scan_lines,
-                     'warp': distort.warp,
-                     'wavy': distort.wavy,
-                     'burn': distort.burn
+effect_dictionary = {'noisy': Noisy,
+                     'highpass': Highpass,
+                     'scanlines': Scanlines,
+                     'warp': Warp,
+                     'wavy': Wavy,
+                     'burn': Burn
                      }

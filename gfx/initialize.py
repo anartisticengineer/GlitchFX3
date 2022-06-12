@@ -43,7 +43,10 @@ class GFX:
     # Try and apply the effect
     def apply_effect(self, effect_name, **kwargs):
         try:
-            self._DEST = effect_dictionary[effect_name](self._TEMP, **kwargs)
+            filt = effect_dictionary[effect_name](self._TEMP, **kwargs)
+            filt.apply_filter()
+            self._DEST = filt.dst_img
+            del filt
             print(f'{effect_name} applied')
             self._TEMP = self._DEST
         except KeyError:
