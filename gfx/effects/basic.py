@@ -15,8 +15,10 @@ class Noisy(GlitchFilter):
                 raise TypeError
         except ValueError:
             print(self._error_msg)
+            raise
         except TypeError:
             print('Percent value should be a float value')
+            raise
         else:
             poisson = np.random.poisson(_percent * 100, self._src_img.size)
             poisson = poisson.reshape(self._h, self._w, self._channels).astype(np.uint8)
@@ -36,6 +38,7 @@ class Scanlines(GlitchFilter):
                 self._dst_img[:, 0:max_i:2] = [0, 0, 0]
         except KeyError:
             print('Invalid orientation (effect bypassed)')
+            raise
 
 
 class Scanner(GlitchFilter):
@@ -48,6 +51,9 @@ class Scanner(GlitchFilter):
             if _percent < 0.0 or _percent > 1.0:
                 self._error_msg = 'Percent should be between 0.0 and 1.0'
                 raise ValueError
+            elif not type(_percent) is float:
+                self._error_msg = 'Percent value should be a float value'
+                raise TypeError
             dimension = self._src_img.shape[orientation_dict[_orientation]]
             border = int(dimension * _percent)
             if _orientation == 'h':
@@ -57,8 +63,13 @@ class Scanner(GlitchFilter):
         except KeyError:
             self._error_msg = 'Invalid orientation (effect bypassed)'
             print(self._error_msg)
+            raise
         except ValueError:
             print(self._error_msg)
+            raise
+        except TypeError:
+            print(self._error_msg)
+            raise
 
 
 class Highpass(GlitchFilter):
