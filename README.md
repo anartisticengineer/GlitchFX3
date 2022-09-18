@@ -3,7 +3,7 @@
 <section>
     <h3>Setup</h3>
     <div>
-        This project is intended for use with Python 3 and assumes some prior knowledge.
+        This project is intended for use with Python 3 and assumes prior knowledge.
     </div>
 </section>
 <section>
@@ -48,6 +48,10 @@
             <tr>
                 <td>scanlines</td>
                 <td>or</td>
+            </tr>
+            <tr>
+                <td>scanner</td>
+                <td>p, or</td>
             </tr>
             <tr>
                 <td>highpass</td>

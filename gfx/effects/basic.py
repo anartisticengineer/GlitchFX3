@@ -6,13 +6,15 @@ from .filter import GlitchFilter
 class Noisy(GlitchFilter):
     def apply_filter(self):
         _percent: float = self._kwarg_dict.get('p', 0.1)
+
         try:
             if _percent < 0.0 or _percent > 1.0:
+                self._error_msg = 'Percent value should be between 0.0 and 1.0'
                 raise ValueError
             if not type(_percent) is float:
                 raise TypeError
         except ValueError:
-            print('Percent value should be between 0.0 and 1.0')
+            print(self._error_msg)
         except TypeError:
             print('Percent value should be a float value')
         else:
@@ -25,6 +27,7 @@ class Scanlines(GlitchFilter):
     def apply_filter(self):
         _orientation: str = self._kwarg_dict.get('or', 'h')
         orientation_dict = {'h': 0, 'v': 1}
+
         try:
             max_i = self._src_img.shape[orientation_dict[_orientation]]
             if _orientation == 'h':
@@ -33,6 +36,29 @@ class Scanlines(GlitchFilter):
                 self._dst_img[:, 0:max_i:2] = [0, 0, 0]
         except KeyError:
             print('Invalid orientation (effect bypassed)')
+
+
+class Scanner(GlitchFilter):
+    def apply_filter(self):
+        _percent: float = self._kwarg_dict.get('p', 0.9)
+        _orientation: str = self._kwarg_dict.get('or', 'h')
+        orientation_dict = {'h': 0, 'v': 1}
+
+        try:
+            if _percent < 0.0 or _percent > 1.0:
+                self._error_msg = 'Percent should be between 0.0 and 1.0'
+                raise ValueError
+            dimension = self._src_img.shape[orientation_dict[_orientation]]
+            border = int(dimension * _percent)
+            if _orientation == 'h':
+                self._dst_img[border:] = self._src_img[border]
+            elif _orientation == 'v':
+                self._dst_img[:, border:] = np.reshape(self._src_img[:, border], (self._h, 1, 3))
+        except KeyError:
+            self._error_msg = 'Invalid orientation (effect bypassed)'
+            print(self._error_msg)
+        except ValueError:
+            print(self._error_msg)
 
 
 class Highpass(GlitchFilter):
