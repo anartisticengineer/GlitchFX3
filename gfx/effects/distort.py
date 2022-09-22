@@ -32,6 +32,7 @@ class Warp(GlitchFilter):
                 self._dst_img[x, y] = self._src_img[u, v]
         except KeyError:
             print('Invalid warp type (effect bypassed)')
+            raise
 
 
 class Wavy(GlitchFilter):
@@ -51,6 +52,7 @@ class Wavy(GlitchFilter):
                 self._dst_img[:, u] = shifted_col
         except ValueError:
             print('Octave value must be a positive integer (effect bypassed)')
+            raise
 
 
 class Burn(GlitchFilter):
@@ -71,3 +73,4 @@ class Burn(GlitchFilter):
                 self._dst_img[u, v] = self._src_img[u, v] if mask_img[u, v] > 125 else edge_img[u, v]
         except ValueError:
             print(self._error_msg)
+            raise
