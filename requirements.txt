@@ -1,4 +1,6 @@
-opencv-python
-numpy
+opencv-python~=4.5.5.64
+numpy~=1.22.3
 perlin_noise
-pytest
+pytest~=7.1.1
+Pillow~=9.2.0
+pixelsort~=1.0.1
