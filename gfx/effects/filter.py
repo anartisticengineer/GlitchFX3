@@ -10,7 +10,7 @@ class GlitchFilter:
         self._src_img = src_img
         self._dst_img = src_img
         self._kwarg_dict = kwargs
-        self._error_msg = ''
+        self._error_msg = 'An error occurred'
 
     @property
     def dst_img(self):
