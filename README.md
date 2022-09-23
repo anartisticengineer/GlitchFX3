@@ -3,7 +3,15 @@
 <section>
     <h3>Setup</h3>
     <div>
-        This project is intended for use with Python 3 and assumes prior knowledge.
+        This project is intended for use with Python 3 (3.9+ recommended).
+        <ol>
+            <li>Clone the repo, navigate to the project root folder</li>
+            <li>Install the packages below. 
+                If using pip for example, you can install everything from the command line via:</li>
+            <code>pip install -r requirements.txt</code>
+            <li>The <code>__main__.py</code> script should be able to run now. 
+                Upon successfully starting up the GFX generator, you can follow the instructions below.</li>
+        </ol>
     </div>
 </section>
 <section>
@@ -13,8 +21,13 @@
         <li>opencv-python</li>
         <li>numpy</li>
         <li>perlin_noise</li>
-        <li>pytest (for unit testing)</li>
+        <li>pytest*</li>
+        <li>Pillow</li>
+        <li>pixelsort**</li>
     </ul>
+    <small>* for unit testing</small>
+    <br/>
+    <small>** The pixelsort package is provided by the <a href="https://github.com/satyarth/pixelsort">pixelsort repo by satyarth</a> - more info on pixel sorting can be found on that repo ;)</small>
 </section>
 <section>
     <h3>Instructions</h3>
@@ -69,6 +82,10 @@
                 <td>burn</td>
                 <td>p</td>
             </tr>
+            <tr>
+                <td>pixelsort</td>
+                <td>or, lower, upper, sortby</td>
+            </tr>
         </tbody>
     </table>
     <h4>Expected values</h4>
@@ -113,6 +130,21 @@
                 <td>oct</td>
                 <td>Octaves</td>
                 <td>int: >= 1</td>
+            </tr>
+            <tr>
+                <td>sortby</td>
+                <td>Sorting Algorithm</td>
+                <td>enum: [lightness, saturation, hue, minimum, intensity]</td>
+            </tr>
+            <tr>
+                <td>lower</td>
+                <td>Lower Threshold</td>
+                <td>float: 0.0 - 1.0 and < upper</td>
+            </tr>
+            <tr>
+                <td>upper</td>
+                <td>Upper Threshold</td>
+                <td>float: 0.0 - 1.0 and > lower</td>
             </tr>
         </tbody>
     </table>
