@@ -13,6 +13,7 @@ class PSort(GlitchFilter):
         _orientation: str = self._kwarg_dict.get('or', 'h')
 
         angle_dict = {'h': 0, 'v': 90}
+        sort_criteria_set = {'lightness', 'saturation', 'hue', 'minimum', 'intensity'}
 
         try:
             orientation_angle = angle_dict[_orientation]
@@ -24,6 +25,9 @@ class PSort(GlitchFilter):
                 raise ValueError
             elif _lower > 1.0 or _upper > 1.0:
                 self._error_msg = 'Threshold value(s) can\'t exceed 1.0'
+                raise ValueError
+            if _sort_by not in sort_criteria_set:
+                self._error_msg = 'Invalid sorting criteria'
                 raise ValueError
             converted_img = cv.cvtColor(self._src_img, cv.COLOR_BGR2RGB)
             pil_img = Image.fromarray(converted_img)
