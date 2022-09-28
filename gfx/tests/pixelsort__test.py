@@ -24,3 +24,8 @@ def test_ps_bad_key():
     with pytest.raises(KeyError):
         PSort(sample_image, **{'or': 'x'}).apply_filter()
 
+
+def test_ps_bad_criteria():
+    with pytest.raises(ValueError):
+        PSort(sample_image, **{'sortby': 'nothing'}).apply_filter()
+
